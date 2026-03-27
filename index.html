@@ -1,155 +1,545 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <title>Jim Schellekens</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Jim Schellekens · Droneaanhuis | Luchtfotografie aan huis</title>
+    <!-- Google Fonts + moderne sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafcff;
+            color: #111827;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
 
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(120deg, #0d0d16, #1a1a2e, #0d0d16);
-      background-size: 300% 300%;
-      animation: bgMove 12s ease infinite;
-      color: white;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* header & navigatie */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 1.5rem 0;
+            gap: 1rem;
+        }
 
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
-    }
+        .logo-area h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #0B2B40, #1C6E8F);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
 
-    section {
-      margin-bottom: 70px;
-    }
+        .logo-area p {
+            font-size: 0.85rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
 
-    /* TYPEWRITER EFFECT */
-    .typewriter {
-      font-size: 3rem;
-      font-weight: 800;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 3px solid white;
-      width: 0;
-      animation: typing 1.6s steps(30) forwards, blink 0.7s infinite;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
 
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #1f2937;
+            transition: color 0.2s;
+        }
 
-    @keyframes blink {
-      0% { border-color: white; }
-      50% { border-color: transparent; }
-      100% { border-color: white; }
-    }
+        .nav-links a:hover {
+            color: #1C6E8F;
+        }
 
-    /* LETTER FADE-IN */
-    .letter {
-      opacity: 0;
-      display: inline-block;
-      transform: translateY(15px);
-      animation: fadeLetter 0.35s forwards;
-    }
+        .btn-outline {
+            border: 1.5px solid #1C6E8F;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            background: white;
+            transition: 0.2s;
+        }
 
-    @keyframes fadeLetter {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .btn-outline:hover {
+            background: #1C6E8F;
+            color: white !important;
+            border-color: #1C6E8F;
+        }
 
-    /* Mail niet blauw */
-    a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    a:hover {
-      opacity: 0.7;
-    }
-  </style>
+        /* hero sectie */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            padding: 3rem 0 4rem 0;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-badge {
+            background: #e2f0f5;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0f5b7a;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-text h2 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-text h2 span {
+            color: #1C6E8F;
+            border-bottom: 3px solid #ffcd7e;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #2c3e44;
+            max-width: 550px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: transparent;
+            border-radius: 48px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 32px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+        }
+
+        /* Als de afbeelding niet laadt, geen fallback tekst */
+        .hero-image img:not([src]), 
+        .hero-image img[src=""],
+        .hero-image img[src="#"] {
+            display: none;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #1C6E8F;
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #0f5775;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 1px solid #cbd5e1;
+            color: #1f2937;
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: #1C6E8F;
+            background: #f8fafc;
+        }
+
+        /* secties algemeen */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: -0.01em;
+        }
+
+        .section-title i {
+            color: #1C6E8F;
+            margin-right: 0.5rem;
+        }
+
+        .grid-3 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+            transition: all 0.25s ease;
+            border: 1px solid #eef2f8;
+            flex: 1;
+            min-width: 240px;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(28,110,143,0.15);
+            border-color: #cde3ec;
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            color: #1C6E8F;
+            margin-bottom: 1.2rem;
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: #4b5563;
+        }
+
+        /* contact sectie */
+        .contact-card {
+            background: white;
+            border-radius: 48px;
+            padding: 2.8rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.08);
+            border: 1px solid #e2edf2;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .contact-details {
+            margin-top: 1.2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            width: 2rem;
+            color: #1C6E8F;
+            font-size: 1.4rem;
+        }
+
+        .contact-item a {
+            color: #1f2937;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .contact-item a:hover {
+            color: #1C6E8F;
+        }
+
+        .btn-email {
+            background: #1C6E8F;
+            color: white;
+            border: none;
+            padding: 0.9rem 1.8rem;
+            border-radius: 48px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-email:hover {
+            background: #0f5775;
+            transform: translateY(-2px);
+        }
+
+        .official-link {
+            background: #eef3f7;
+            border-radius: 60px;
+            padding: 0.9rem 1.5rem;
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-weight: 500;
+        }
+
+        .official-link i {
+            color: #1C6E8F;
+            margin-right: 0.5rem;
+        }
+
+        .official-link a {
+            color: #0f5b7a;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dashed #8ab3c2;
+        }
+
+        .official-link a:hover {
+            border-bottom: 1px solid #1C6E8F;
+        }
+
+        .projecten-link-block {
+            background: #f0f6fa;
+            border-radius: 40px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .footer-simple {
+            border-top: 1px solid #e2edf2;
+            padding: 2rem 0;
+            text-align: center;
+            color: #6c7f96;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+        }
+
+        /* responsive */
+        @media (max-width: 800px) {
+            .hero-text h2 {
+                font-size: 2.4rem;
+            }
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .container {
+                padding: 0 1.5rem;
+            }
+            .contact-card {
+                flex-direction: column;
+                text-align: left;
+            }
+            .card {
+                min-width: 100%;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo-area">
+                <h1>Jim Schellekens</h1>
+                <p>Dronefotografie · Luchtbeelden aan huis</p>
+            </div>
+            <div class="nav-links">
+                <a href="#diensten">Diensten</a>
+                <a href="#contact">Contact</a>
+                <a href="https://droneaanhuis.jimschellekens.nl" target="_blank" class="btn-outline"><i class="fas fa-external-link-alt"></i> Naar droneaanhuis</a>
+            </div>
+        </div>
+    </div>
+</header>
+
 <main>
+    <div class="container">
+        <!-- HERO sectie met alleen de foto droneaanhuisinactie.png, geen extra tekst -->
+        <div class="hero">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <i class="fas fa-drone"></i>  Jim Schellekens · Droneaanhuis
+                </div>
+                <h2>Jouw huis, werk of product<br> <span>vanuit een uniek perspectief</span></h2>
+                <p>Ik ben Jim, specialist in dronefotografie aan huis. Met oog voor detail, frisse composities en scherpe beelden geef ik jouw pand, werkplek of product de aandacht die het verdient. Vrijblijvend kennismaken? Graag!</p>
+                <div class="btn-group">
+                    <a href="#contact" class="btn-primary"><i class="fas fa-calendar-alt"></i> Vrijblijvend contact</a>
+                    <a href="https://droneaanhuis.jimschellekens.nl/projecten" target="_blank" class="btn-secondary"><i class="fas fa-images"></i> Mijn projecten</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Alleen de foto droneaanhuisinactie.png, als die niet bestaat niets tonen -->
+                <img src="droneaanhuisinactie.png" alt="" id="actionImage" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </div>
 
-  <!-- TYPEWRITER NAAM -->
-  <section>
-    <div class="typewriter" id="typeName">Jim Schellekens</div>
-    <p id="subtitle"></p>
-  </section>
+    <!-- DIENSTEN sectie -->
+    <div class="section" id="diensten">
+        <div class="container">
+            <div class="section-title">
+                <i class="fas fa-camera-drone"></i> Wat ik voor je doe
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-home"></i></div>
+                    <h3>Woningfotografie</h3>
+                    <p>Luchtfoto's van jouw huis, perfect voor verkoop, verhuur of gewoon trots. Maak indruk met heldere, sfeervolle beelden.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                    <h3>Bedrijf & werk</h3>
+                    <p>Bedrijfspanden, kantoren of bouwlocaties professioneel in beeld. Versterk je website, socials en uitstraling.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-cube"></i></div>
+                    <h3>Productfotografie</h3>
+                    <p>Ook voor unieke producten, landschappen of projecten: dynamische dronebeelden die jouw verhaal kracht bijzetten.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!-- WAT IK DOE -->
-  <section class="fade">
-    <h2>Wat ik doe</h2>
+    <!-- Projecten verwijzing: "Mijn projecten" zijn te vinden op droneaanhuis.jimschellekens.nl/projecten -->
+    <div class="container">
+        <div class="projecten-link-block">
+            <i class="fas fa-folder-open" style="font-size: 2rem; color: #1C6E8F; margin-bottom: 0.5rem; display: inline-block;"></i>
+            <h3 style="font-size: 1.6rem; font-weight: 700;">Mijn projecten</h3>
+            <p style="max-width: 600px; margin: 0.75rem auto;">Bekijk hier mijn recente dronefotografie projecten: woningen, bedrijven en producten in beeld.</p>
+            <a href="https://droneaanhuis.jimschellekens.nl/projecten" target="_blank" class="btn-primary" style="margin-top: 1rem; display: inline-flex;"><i class="fas fa-external-link-alt"></i> Bekijk alle projecten</a>
+        </div>
+    </div>
 
-    <h3>DJ T ‑ J</h3>
-    <ul>
-      <li>Feesten, verjaardagen en school‑events</li>
-      <li>Pop, dance, EDM, classics en verzoekjes</li>
-      <li>Strakke mixen en goede sfeer</li>
-    </ul>
-
-    <h3>Drone & Tech</h3>
-    <ul>
-      <li>Vliegen met mijn drone</li>
-      <li>Luchtbeelden en creatieve shots bij u thuis</li>
-      <li>Video‑editing</li>
-    </ul>
-  </section>
-
-  <section class="fade">
-    <h2>Contact</h2>
-    <p>E‑mail: <a href="mailto:jimschel1@outlook.com">jimschel1@outlook.com</a></p>
-    <p>Locatie: Noordwijkerhout</p>
-  </section>
-
+    <!-- CONTACT sectie (geen WhatsApp, geen bedrijfsnaam onderaan, geen regelgeving) -->
+    <div class="section" id="contact">
+        <div class="container">
+            <div class="contact-card">
+                <div class="contact-info">
+                    <h3><i class="fas fa-paper-plane"></i>  Laten we vliegen!</h3>
+                    <p style="margin-top: 0.5rem; max-width: 450px;">Heb je interesse, vragen of wil je direct een afspraak maken? Bel of mail me gerust. Ik kom graag bij je langs voor een vrijblijvende kennismaking.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><strong>E-mail:</strong> <a href="mailto:Jimschel1@outlook.com">Jimschel1@outlook.com</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span><strong>Telefoon:</strong> <a href="tel:+31638055991">06 38055991</a></span>
+                        </div>
+                    </div>
+                    <div class="official-link">
+                        <i class="fas fa-globe"></i> Officiële website: 
+                        <a href="https://droneaanhuis.jimschellekens.nl" target="_blank">droneaanhuis.jimschellekens.nl</a>
+                    </div>
+                </div>
+                <div style="min-width: 200px;">
+                    <a href="mailto:Jimschel1@outlook.com" class="btn-email"><i class="fas fa-envelope-open-text"></i> Stuur e-mail</a>
+                    <p style="margin-top: 1rem; font-size: 0.8rem;">Ook voor vrijblijvende offerte</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 
+<!-- Simpele footer zonder bedrijfsnaam onderaan, alleen een neutrale afsluiting -->
+<footer class="footer-simple">
+    <div class="container">
+        <p>© Jim Schellekens</p>
+    </div>
+</footer>
+
 <script>
-  /* Typewriter verdwijnt na typen */
-  const typeName = document.getElementById("typeName");
-  typeName.addEventListener("animationend", () => {
-    typeName.style.borderRight = "none";
-  });
+    // Zorg dat de afbeelding alleen zichtbaar is als hij bestaat.
+    // De onerror handler op de img tag verbergt hem al bij fout.
+    // Daarnaast proberen we eventueel de afbeelding te valideren (geen extra tekst)
+    const img = document.getElementById('actionImage');
+    if (img) {
+        // Als de afbeelding niet laadt, blijft hij verborgen (display:none via onerror)
+        // Check ook of de src leeg is
+        if (!img.src || img.src === window.location.href || img.src.indexOf('null') > -1) {
+            img.style.display = 'none';
+        }
+        // Eventueel extra fallback: als de image error geeft, is hij al verborgen
+        img.onerror = function() {
+            this.style.display = 'none';
+        };
+        // Als de image wel laadt, zorg dat hij zichtbaar is
+        img.onload = function() {
+            this.style.display = 'block';
+        };
+    }
 
-  /* Fade-in per letter met behoud van HTML */
-  function fadeLetters(element) {
-    const text = element.innerText; // <-- FIX: geen HTML breken
-    element.innerHTML = "";
-
-    [...text].forEach((char, i) => {
-      const span = document.createElement("span");
-      span.className = "letter";
-      span.style.animationDelay = (i * 0.015) + "s"; // SNELLER
-      span.innerHTML = char === " " ? "&nbsp;" : char;
-      element.appendChild(span);
+    // Smooth scroll voor interne ankers
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId === "#" || targetId === "") return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                const offset = 70;
+                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+            }
+        });
     });
-  }
-
-  document.querySelectorAll(".fade h2, .fade p, .fade li, .fade h3").forEach(el => {
-    fadeLetters(el);
-  });
-
-  /* Subtitle fade-in */
-  const subtitle = "DJ • Dronepiloot";
-  const subtitleElement = document.getElementById("subtitle");
-  fadeLetters(subtitleElement);
 </script>
 
 </body>
