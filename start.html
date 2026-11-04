@@ -23,44 +23,104 @@
       box-shadow: 0 32px 90px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.1);
       backdrop-filter: blur(18px);
     }
-    main::before, main::after { content: ""; position: absolute; width: 190px; height: 190px; border-radius: 50%; filter: blur(1px); opacity: .5; pointer-events:none; }
+    main::before, main::after {
+      content: ""; position: absolute; width: 190px; height: 190px;
+      border-radius: 50%; filter: blur(1px); opacity: .5; pointer-events: none;
+    }
     main::before { top: -120px; right: -42px; background: #91c4cd; }
     main::after { bottom: -145px; left: -40px; background: #c398a5; }
-    .eyebrow { margin: 0 0 22px; color: #c4d5e1; font-size: 12px; font-weight: 650; letter-spacing: .23em; text-transform: uppercase; }
-    #clock { font-size: clamp(76px, 18vw, 148px); font-weight: 300; letter-spacing: -.075em; line-height: .95; font-variant-numeric: tabular-nums; }
-    #date { margin: 24px 0 0; color: var(--muted); font-size: clamp(15px, 2.5vw, 19px); font-weight: 450; }
+
+    .eyebrow {
+      margin: 0 0 22px; color: #c4d5e1; font-size: 12px;
+      font-weight: 650; letter-spacing: .23em; text-transform: uppercase;
+    }
+    #clock {
+      font-size: clamp(76px, 18vw, 148px); font-weight: 300;
+      letter-spacing: -.075em; line-height: .95; font-variant-numeric: tabular-nums;
+    }
+    #date {
+      margin: 24px 0 0; color: var(--muted);
+      font-size: clamp(15px, 2.5vw, 19px); font-weight: 450;
+    }
     .search { width: min(100%, 430px); margin-top: 34px; position: relative; z-index: 1; }
     .search input {
       width: 100%; height: 56px; padding: 0 22px 0 52px; border-radius: 999px;
       border: 1px solid rgba(255,255,255,.2); outline: none; color: var(--ink);
       background: rgba(7,14,27,.32); font: inherit; font-size: 15px;
-      box-shadow: inset 0 1px rgba(255,255,255,.08); transition: background .2s, border-color .2s, box-shadow .2s;
+      box-shadow: inset 0 1px rgba(255,255,255,.08);
+      transition: background .2s, border-color .2s, box-shadow .2s;
     }
     .search input::placeholder { color: #aab3c3; }
-    .search input:focus { background: rgba(7,14,27,.52); border-color: rgba(210,231,243,.65); box-shadow: 0 0 0 4px rgba(210,231,243,.1); }
+    .search input:focus {
+      background: rgba(7,14,27,.52); border-color: rgba(210,231,243,.65);
+      box-shadow: 0 0 0 4px rgba(210,231,243,.1);
+    }
     .search svg { position: absolute; left: 20px; top: 17px; color: #aab3c3; pointer-events: none; }
     .rule { width: 42px; height: 1px; margin: 34px 0 22px; background: rgba(255,255,255,.38); }
     .note { margin: 0; color: #e3e6e9; font-size: 16px; letter-spacing: .01em; }
-    @media (max-width: 480px) { main { min-height: 100vh; border-radius: 22px; padding: 32px 24px; } }
+
+    .ad-slot {
+      position: relative; z-index: 1; width: min(100%, 728px); min-height: 90px;
+      margin-top: clamp(28px, 6vh, 56px); padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .ad-slot .adsbygoogle { min-height: 90px; }
+
+    @media (max-width: 480px) {
+      main { min-height: 100vh; border-radius: 22px; padding: 32px 24px; }
+      .ad-slot { min-height: 100px; margin-top: 28px; }
+      .ad-slot .adsbygoogle { min-height: 100px; }
+    }
   </style>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9334735760280399"
+          crossorigin="anonymous"></script>
 </head>
 <body>
   <main aria-label="Klok en datum">
     <p class="eyebrow">Neem een moment</p>
     <time id="clock" aria-label="Lokale tijd"></time>
     <time id="date"></time>
+
     <form class="search" action="https://www.bing.com/search" method="get" role="search">
-      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.2 4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-      <input type="search" name="q" placeholder="Waar ben je naar op zoek?" aria-label="Zoeken op Bing" autocomplete="off">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/>
+        <path d="m16 16 4.2 4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      </svg>
+      <input type="search" name="q" placeholder="Waar ben je naar op zoek?"
+             aria-label="Zoeken op Bing" autocomplete="off">
     </form>
+
     <div class="rule" aria-hidden="true"></div>
     <p class="note">Je bent precies waar je moet zijn.</p>
+
+    <div class="ad-slot" aria-label="Advertentie">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9334735760280399"
+           data-ad-slot="2107133941"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
   </main>
+
   <script>
     const clock = document.querySelector('#clock');
     const date = document.querySelector('#date');
-    const timeFormatter = new Intl.DateTimeFormat('nl-NL', { hour: '2-digit', minute: '2-digit', hour12: false });
-    const dateFormatter = new Intl.DateTimeFormat('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+    const timeFormatter = new Intl.DateTimeFormat('nl-NL', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+
+    const dateFormatter = new Intl.DateTimeFormat('nl-NL', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+
     function update() {
       const now = new Date();
       clock.textContent = timeFormatter.format(now);
@@ -68,8 +128,11 @@
       date.textContent = dateFormatter.format(now);
       date.dateTime = now.toISOString().slice(0, 10);
     }
+
     update();
     setInterval(update, 1000);
+
+    (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </body>
 </html>
