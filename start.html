@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Nexi Startpagina</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one screen. Greeting centered at the top, search with category chips centered near the bottom, a small Nexi pill fixed bottom right. Soft daypart glow behind. */
+:root {
+  --bg: #F2F4F8;
+  --surface: #FFFFFF;
+  --fg: #0F1824;
+  --muted: #5B6778;
+  --line: #DCE2EA;
+  --accent: #2458F5;
+  --accent-fg: #FFFFFF;
+  --chip-bg: #E4EBFF;
+  --chip-fg: #1B43C2;
+  --mark-bg: #0F1824;
+  --mark-fg: #FFFFFF;
+  --shadow: 0 14px 34px -16px rgba(15, 24, 36, 0.28);
+  --glow: #BFD9FF;
+  --glow2: #E3E9FF;
+  --glow-strength: 62%;
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1017;
+    --surface: #141C27;
+    --fg: #EBF0F6;
+    --muted: #95A2B4;
+    --line: #243040;
+    --accent: #7AA0FF;
+    --accent-fg: #0A1222;
+    --chip-bg: #1C2A4A;
+    --chip-fg: #B3C8FF;
+    --mark-bg: #7AA0FF;
+    --mark-fg: #0A1222;
+    --shadow: 0 14px 34px -16px rgba(0, 0, 0, 0.7);
+    --glow-strength: 24%;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1017;
+  --surface: #141C27;
+  --fg: #EBF0F6;
+  --muted: #95A2B4;
+  --line: #243040;
+  --accent: #7AA0FF;
+  --accent-fg: #0A1222;
+  --chip-bg: #1C2A4A;
+  --chip-fg: #B3C8FF;
+  --mark-bg: #7AA0FF;
+  --mark-fg: #0A1222;
+  --shadow: 0 14px 34px -16px rgba(0, 0, 0, 0.7);
+  --glow-strength: 24%;
+  color-scheme: dark;
+}
+body[data-part="night"]     { --glow: #9FB3FF; --glow2: #C9D2FF; }
+body[data-part="morning"]   { --glow: #FFCE94; --glow2: #FFE6C2; }
+body[data-part="afternoon"] { --glow: #BFD9FF; --glow2: #E3E9FF; }
+body[data-part="evening"]   { --glow: #FFBFA8; --glow2: #FFD9E0; }
+
+html { height: 100%; }
+body {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-block: clamp(28px, 9vh, 96px) clamp(76px, 13vh, 130px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+.glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(50rem 28rem at 50% -8%, color-mix(in srgb, var(--glow) var(--glow-strength), transparent), transparent 72%),
+    radial-gradient(42rem 22rem at 50% 108%, color-mix(in srgb, var(--glow2) var(--glow-strength), transparent), transparent 72%);
+}
+
+.wrap {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  max-width: 740px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+.wrap > * { animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.wrap > :nth-child(2) { animation-delay: 0.08s; }
+@keyframes rise { from { transform: translateY(10px); } to { transform: none; } }
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 8.5vw, 4.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+h1 .name { color: var(--accent); }
+
+.meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.date { display: inline-block; }
+.date::first-letter { text-transform: uppercase; }
+.clock {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 14px;
+}
+
+.search-block {
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.chip {
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.chip:hover { color: var(--fg); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.chip[aria-pressed="true"] {
+  color: var(--chip-fg);
+  background: var(--chip-bg);
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 7px 7px 20px;
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.search:focus-within {
+  border-color: var(--accent);
+  box-shadow: var(--shadow), 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.search .ico { flex: none; color: var(--muted); }
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 1.12rem;
+  padding: 11px 0;
+}
+.search input::placeholder { color: var(--muted); }
+.search button {
+  flex: none;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font: inherit;
+  font-weight: 600;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+.search button:hover { filter: brightness(1.1); }
+
+.nexi {
+  position: fixed;
+  z-index: 5;
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px 5px 5px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  color: var(--fg);
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.nexi:hover { border-color: var(--accent); transform: translateY(-1px); }
+.mark {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+}
+.mark.fallback { background: var(--mark-bg); color: var(--mark-fg); }
+.mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nexi-name { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; line-height: 1; }
+
+.chip:focus-visible,
+.nexi:focus-visible,
+.search button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .search button { padding: 12px 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wrap > * { animation: none; }
+  .nexi, .chip, .search { transition: none; }
+  .nexi:hover { transform: none; }
+}
+</style>
+
+<div class="glow" aria-hidden="true"></div>
+
+<main class="wrap">
+  <div class="head">
+    <h1><span id="greet">Goedemorgen</span>, <span class="name">Jim</span>.</h1>
+    <div class="meta">
+      <span class="date" id="date"></span>
+      <span class="clock" id="clock">--:--</span>
+    </div>
+  </div>
+
+  <section class="search-block" aria-label="Zoeken">
+    <div class="chips" role="group" aria-label="Zoeken in">
+      <button type="button" class="chip" data-engine="web" aria-pressed="true">Web</button>
+      <button type="button" class="chip" data-engine="images" aria-pressed="false">Afbeeldingen</button>
+      <button type="button" class="chip" data-engine="video" aria-pressed="false">Video's</button>
+      <button type="button" class="chip" data-engine="news" aria-pressed="false">Nieuws</button>
+      <button type="button" class="chip" data-engine="maps" aria-pressed="false">Kaarten</button>
+    </div>
+    <form class="search" id="searchForm" role="search">
+      <svg class="ico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <label class="sr" for="q">Zoekopdracht</label>
+      <input id="q" type="search" name="q" placeholder="Zoek op Bing" autocomplete="off">
+      <button type="submit">Zoeken</button>
+    </form>
+  </section>
+</main>
+
+<a class="nexi" href="https://jimisdebest.github.io/nexi/train" target="_blank" rel="noopener noreferrer" aria-label="Open Nexi" title="Open Nexi">
+  <span class="mark" id="nexiMark" aria-hidden="true"><img id="nexiLogo" src="https://jimisdebest.github.io/nexi/logo.png" alt="" width="30" height="30"><span id="nexiN" hidden>N</span></span>
+  <span class="nexi-name">Nexi</span>
+</a>
+
+<script>
+(function () {
+  var engines = {
+    web:    { ph: 'Zoek op Bing',         home: 'https://www.bing.com/',       search: 'https://www.bing.com/search?q=' },
+    images: { ph: 'Zoek afbeeldingen',    home: 'https://www.bing.com/images', search: 'https://www.bing.com/images/search?q=' },
+    video:  { ph: 'Zoek video’s',    home: 'https://www.bing.com/videos', search: 'https://www.bing.com/videos/search?q=' },
+    news:   { ph: 'Zoek nieuws',          home: 'https://www.bing.com/news',   search: 'https://www.bing.com/news/search?q=' },
+    maps:   { ph: 'Zoek plaats of adres', home: 'https://www.bing.com/maps',   search: 'https://www.bing.com/maps?q=' }
+  };
+  var current = 'web';
+  var input = document.getElementById('q');
+  var form = document.getElementById('searchForm');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+
+  function applyEngine() {
+    chips.forEach(function (c) {
+      c.setAttribute('aria-pressed', c.getAttribute('data-engine') === current ? 'true' : 'false');
+    });
+    input.placeholder = engines[current].ph;
+  }
+
+  // Altijd een schone start: lege zoekbalk en weer op Web.
+  function reset() {
+    current = 'web';
+    input.value = '';
+    applyEngine();
+  }
+
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      current = c.getAttribute('data-engine');
+      applyEngine();
+      input.focus();
+    });
+  });
+
+  // Zoeken vervangt het huidige tabblad door Bing.
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var e = engines[current];
+    var v = input.value.trim();
+    var a = document.createElement('a');
+    a.href = v ? e.search + encodeURIComponent(v) : e.home;
+    a.target = '_top';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+
+  // Terug met de terugknop (ook uit de cache): zoekterm weg, chip weer op Web.
+  window.addEventListener('pageshow', function () {
+    reset();
+    setTimeout(reset, 0);
+  });
+
+  // Nexi-logo, met letter als het logo niet laadt.
+  var mark = document.getElementById('nexiMark');
+  var logo = document.getElementById('nexiLogo');
+  var letter = document.getElementById('nexiN');
+  function logoFallback() {
+    mark.classList.add('fallback');
+    letter.hidden = false;
+    if (logo.parentNode) logo.parentNode.removeChild(logo);
+  }
+  logo.addEventListener('error', logoFallback);
+  if (logo.complete && logo.naturalWidth === 0) logoFallback();
+
+  var greetEl = document.getElementById('greet');
+  var clockEl = document.getElementById('clock');
+  var dateEl = document.getElementById('date');
+
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  function tick() {
+    var d = new Date();
+    var h = d.getHours();
+    var part = h < 6 ? 'night' : h < 12 ? 'morning' : h < 18 ? 'afternoon' : 'evening';
+    var g = { night: 'Goedenacht', morning: 'Goedemorgen', afternoon: 'Goedemiddag', evening: 'Goedenavond' }[part];
+    greetEl.textContent = g;
+    document.body.setAttribute('data-part', part);
+    clockEl.textContent = pad(h) + ':' + pad(d.getMinutes());
+    try {
+      dateEl.textContent = d.toLocaleDateString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long' });
+    } catch (e) {
+      dateEl.textContent = '';
+    }
+  }
+
+  reset();
+  tick();
+  setInterval(tick, 1000);
+  try {
+    if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) input.focus();
+  } catch (e) {}
+})();
+</script>
+
+</html>
